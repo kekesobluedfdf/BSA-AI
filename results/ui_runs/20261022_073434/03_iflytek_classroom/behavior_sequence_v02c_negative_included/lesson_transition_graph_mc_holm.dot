@@ -1,0 +1,20 @@
+digraph behavior_sequence {
+  graph [rankdir="LR", bgcolor="white", pad="0.3", nodesep="0.35", ranksep="0.7", labelloc="t", label="Monte Carlo：Holm 校正；蓝色实线=正向；红色虚线=负向；橙色点线=E<5；边标签=p, P(j|i)", fontsize="10"];
+  node [shape="box", style="rounded,filled", fillcolor="#F4F6F7", color="#566573", fontname="Microsoft YaHei"];
+  edge [fontname="Microsoft YaHei", fontsize="10"];
+  "A" [label="A\n教师接受情感"];
+  "B" [label="B\n教师鼓励表扬"];
+  "C" [label="C\n采纳意见"];
+  "D" [label="D\n提问开放性问题"];
+  "E" [label="E\n提问封闭性问题"];
+  "F" [label="F\n讲授"];
+  "G" [label="G\n指示"];
+  "I" [label="I\n示范与引导"];
+  "J" [label="J\n应答（被动反应）"];
+  "N" [label="N\n停顿或沉默"];
+  "F" -> "F" [label="p=0.000*\nP=0.47", color="#2471A3", fontcolor="#2471A3", style="solid", penwidth="2.48"];
+  "J" -> "B" [label="p=0.000*\nP=0.15", color="#2471A3", fontcolor="#2471A3", style="solid", penwidth="2.48"];
+  "I" -> "I" [label="p=0.000*\nP=0.30\nE<5", color="#B9770E", fontcolor="#B9770E", style="dotted", penwidth="2.48"];
+  "J" -> "J" [label="p=0.000*\nP=0.53", color="#2471A3", fontcolor="#2471A3", style="solid", penwidth="2.48"];
+  "G" -> "G" [label="p=0.000*\nP=0.36", color="#2471A3", fontcolor="#2471A3", style="solid", penwidth="2.36"];
+}

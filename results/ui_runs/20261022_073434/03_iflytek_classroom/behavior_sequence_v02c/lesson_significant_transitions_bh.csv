@@ -1,0 +1,12 @@
+﻿from_code,from_name,to_code,to_name,observed,expected,transition_probability,adjusted_residual,raw_p_value,expected_lt_5,expected_lt_1,testable,warning_reason,p_holm,q_bh,sig_raw,sig_holm,sig_bh,direction,negative_suppressed,significance
+F,讲授,F,讲授,27,7.716,0.4655,8.008,1.1672722521351206e-15,False,False,True,,1.0505450269216085e-13,1.0505450269216085e-13,True,True,True,positive,False,***
+J,应答（被动反应）,J,应答（被动反应）,70,40.571,0.5263,6.648,2.9653229828949123e-11,False,False,True,,2.6391374547764718e-09,1.3343953423027105e-09,True,True,True,positive,False,***
+E,提问封闭性问题,E,提问封闭性问题,2,0.147,0.25,4.927,8.331639106712297e-07,True,True,True,expected_lt_5; expected_lt_1,7.165209631772575e-05,1.4996950392082134e-05,True,True,True,positive,False,***
+I,示范与引导,I,示范与引导,13,4.241,0.3023,4.719,2.3723578037793502e-06,True,False,True,expected_lt_5,0.00020165041332124477,3.558536705669025e-05,True,True,True,positive,False,***
+J,应答（被动反应）,B,教师鼓励表扬,20,9.151,0.1504,4.458,8.275348199200265e-06,False,False,True,,0.0006951292487328223,0.00010639733398971768,True,True,True,positive,False,***
+G,指示,G,指示,31,16.766,0.3647,4.324,1.5306580599841905e-05,False,False,True,,0.001270446189786878,0.00017219903174822142,True,True,True,positive,False,***
+B,教师鼓励表扬,F,讲授,11,3.991,0.3667,3.905,9.425336196187767e-05,True,False,True,expected_lt_5,0.007728775680873969,0.0009425336196187766,True,True,True,positive,False,***
+F,讲授,D,提问开放性问题,17,7.982,0.2931,3.692,0.0002227533664523689,False,False,True,,0.01804302268264188,0.00200478029807132,True,True,True,positive,False,**
+D,提问开放性问题,D,提问开放性问题,17,8.257,0.2833,3.528,0.00041834652380289233,False,False,True,,0.03346772190423139,0.003422835194750937,True,True,True,positive,False,**
+A,教师接受情感,I,示范与引导,1,0.099,1.0,3.027,0.00247288869098715,True,True,True,expected_lt_5; expected_lt_1,0.19041242920601054,0.014837332145922899,True,False,True,positive,False,*
+I,示范与引导,A,教师接受情感,1,0.099,0.0233,3.027,0.00247288869098715,True,True,True,expected_lt_5; expected_lt_1,0.19041242920601054,0.014837332145922899,True,False,True,positive,False,*

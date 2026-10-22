@@ -1,0 +1,69 @@
+{
+  "engine": "iflytek",
+  "model": "recording_file_llm",
+  "pd": "edu",
+  "language": "autodialect",
+  "roleType": 1,
+  "roleNum": 10,
+  "teacher_id": "S01",
+  "teacher_speaker": "auto",
+  "duration_ms": 2396800,
+  "segments": 471,
+  "speaker_info": {
+    "teacher_raw": "1",
+    "mapping": {
+      "1": "S01",
+      "2": "S02",
+      "3": "S02",
+      "4": "S02",
+      "5": "S02",
+      "6": "S02",
+      "7": "S02",
+      "8": "S02",
+      "9": "S02",
+      "10": "S02"
+    },
+    "totals": {
+      "1": 1361570,
+      "2": 242640,
+      "3": 137850,
+      "4": 38870,
+      "5": 32870,
+      "6": 94060,
+      "7": 62040,
+      "8": 72400,
+      "9": 51600,
+      "10": 212530
+    }
+  },
+  "raw_info": {
+    "orderInfo": {
+      "orderId": "DKHJQ20261022073822542mJFXn0vKUp1bT7MK",
+      "failType": 0,
+      "status": 4,
+      "originalDuration": 2396800,
+      "realDuration": 2396800,
+      "expireTime": 1792885101000
+    },
+    "taskEstimateTime": 0,
+    "speaker_totals": {
+      "1": 1361570,
+      "2": 242640,
+      "3": 137850,
+      "4": 38870,
+      "5": 32870,
+      "6": 94060,
+      "7": 62040,
+      "8": 72400,
+      "9": 51600,
+      "10": 212530
+    },
+    "lattice_count": 471
+  },
+  "upload_info": {
+    "order_id": "DKHJQ20261022073822542mJFXn0vKUp1bT7MK",
+    "signature_random": "02BtXTxRgOUpYwv0",
+    "duration_ms": 2396800,
+    "file_size": 76697678
+  }
+}

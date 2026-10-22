@@ -1,0 +1,812 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ClassroomResearchAI 使用教程</title>
+<style>
+  :root{
+    --ink:#1f2933; --muted:#5f6b7a; --line:#d9e2ec; --bg:#f7f9fc;
+    --blue:#1f6feb; --blue-dark:#174ea6; --green:#1b7f5a;
+    --amber:#9a6700; --amber-bg:#fff8e6; --red:#b42318;
+    --card:#ffffff; --soft:#eef4ff;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font:16px/1.8 -apple-system,BlinkMacSystemFont,"Segoe UI","Microsoft YaHei",sans-serif;}
+  a{color:var(--blue-dark);text-decoration:none}
+  a:hover{text-decoration:underline}
+  header.hero{background:linear-gradient(135deg,#0f2b5b,#1f6feb);color:#fff;padding:48px 28px 42px}
+  header.hero .inner{max-width:1180px;margin:auto}
+  header.hero h1{margin:0 0 10px;font-size:36px;line-height:1.25}
+  header.hero p{margin:0;max-width:900px;color:#dbe9ff;font-size:17px}
+  .badges{margin-top:18px;display:flex;gap:8px;flex-wrap:wrap}
+  .badge{background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.25);
+    color:#fff;border-radius:999px;padding:4px 11px;font-size:13px}
+  .layout{max-width:1180px;margin:28px auto 60px;padding:0 20px;display:grid;
+    grid-template-columns:270px minmax(0,1fr);gap:30px}
+  nav.toc{position:sticky;top:18px;align-self:start;background:var(--card);
+    border:1px solid var(--line);border-radius:14px;padding:18px 16px;max-height:calc(100vh - 36px);overflow:auto}
+  nav.toc h2{font-size:15px;margin:0 0 10px;color:var(--muted);letter-spacing:.04em}
+  nav.toc ol{margin:0;padding-left:20px}
+  nav.toc li{margin:7px 0;font-size:14px}
+  main{min-width:0}
+  section{background:var(--card);border:1px solid var(--line);border-radius:14px;
+    padding:26px 28px;margin-bottom:22px}
+  h2{margin:0 0 14px;font-size:26px;line-height:1.35;border-bottom:2px solid var(--soft);padding-bottom:8px}
+  h3{margin:26px 0 10px;font-size:20px}
+  h4{margin:20px 0 8px;font-size:17px}
+  p{margin:9px 0}
+  ul,ol{padding-left:24px}
+  li{margin:5px 0}
+  .muted{color:var(--muted)}
+  .lead{font-size:18px}
+  .note,.warn,.danger,.tip{border-radius:10px;padding:12px 15px;margin:14px 0}
+  .note{background:#eef4ff;border-left:5px solid var(--blue)}
+  .warn{background:var(--amber-bg);border-left:5px solid var(--amber)}
+  .danger{background:#fff1f0;border-left:5px solid var(--red)}
+  .tip{background:#edf9f2;border-left:5px solid var(--green)}
+  .note b,.warn b,.danger b,.tip b{display:inline-block;margin-bottom:2px}
+  figure{margin:20px 0;border:1px solid var(--line);border-radius:12px;overflow:hidden;background:#fff}
+  figure img{display:block;width:100%;height:auto}
+  figcaption{font-size:13px;color:var(--muted);padding:9px 12px;background:#fafbfc;border-top:1px solid var(--line)}
+  table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px}
+  th,td{border:1px solid var(--line);padding:8px 10px;vertical-align:top;text-align:left}
+  th{background:#f2f6fb;font-weight:600}
+  tr:nth-child(even) td{background:#fbfcfe}
+  code,kbd{font-family:Consolas,"SFMono-Regular",monospace;background:#f1f4f7;
+    border:1px solid #e1e7ee;border-radius:5px;padding:1px 5px;font-size:14px}
+  pre{background:#0f172a;color:#e6edf7;border-radius:10px;padding:14px 16px;overflow:auto;line-height:1.55}
+  pre code{background:none;border:none;color:inherit;padding:0;font-size:13px}
+  .steps{counter-reset:step;list-style:none;padding-left:0}
+  .steps>li{counter-increment:step;position:relative;padding:4px 0 10px 42px}
+  .steps>li::before{content:counter(step);position:absolute;left:0;top:1px;width:28px;height:28px;
+    border-radius:50%;background:var(--blue);color:#fff;font-weight:700;text-align:center;line-height:28px;font-size:14px}
+  .grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+  .card{border:1px solid var(--line);border-radius:11px;padding:14px 16px;background:#fcfdff}
+  .card h4{margin-top:0}
+  details{border:1px solid var(--line);border-radius:10px;padding:10px 14px;margin:12px 0;background:#fcfdff}
+  summary{cursor:pointer;font-weight:600;color:var(--blue-dark)}
+  .pill{display:inline-block;border-radius:999px;padding:2px 9px;font-size:12px;font-weight:600}
+  .pill.done{background:#e6f6ee;color:#176b49}
+  .pill.part{background:#fff4d6;color:#8a5a00}
+  .pill.no{background:#ffe9e7;color:#a31d12}
+  .sample{background:#fbfcfe;border:1px dashed #b8c7dc;border-radius:10px;padding:15px 18px;margin:14px 0}
+  .sample p{margin:7px 0}
+  .sample .placeholder{color:#8a5a00;background:#fff6dc;padding:0 3px;border-radius:3px}
+  footer{max-width:1180px;margin:0 auto 50px;padding:0 20px;color:var(--muted);font-size:13px}
+  .anchor{scroll-margin-top:18px}
+  @media (max-width:900px){
+    .layout{grid-template-columns:1fr}
+    nav.toc{position:static;max-height:none}
+    .grid2{grid-template-columns:1fr}
+  }
+  @media print{
+    body{background:#fff}
+    nav.toc{display:none}
+    .layout{display:block;max-width:none;margin:0;padding:0}
+    section{break-inside:avoid;border:none;padding:0 0 18px}
+    header.hero{background:#fff;color:#000;border-bottom:2px solid #000}
+    header.hero p{color:#000}
+  }
+</style>
+</head>
+<body>
+<header class="hero">
+  <div class="inner">
+    <h1>ClassroomResearchAI 使用教程</h1>
+    <p>从课堂音频到转录、人工修订、AI 行为编码，再到单课堂滞后序列分析（LSA）和多课堂研究项目。面向一线教师与统计基础较弱的研究生。</p>
+    <div class="badges">
+      <span class="badge">单课堂分析</span>
+      <span class="badge">多课堂分析</span>
+      <span class="badge">AI 辅助编码</span>
+      <span class="badge">人工复核</span>
+      <span class="badge">HTML / CSV / SVG / PNG 导出</span>
+    </div>
+  </div>
+</header>
+
+<div class="layout">
+<nav class="toc">
+  <h2>目录</h2>
+  <ol>
+    <li><a href="#before">开始前先看</a></li>
+    <li><a href="#capability">系统能做什么、不能做什么</a></li>
+    <li><a href="#prepare">安装与启动</a></li>
+    <li><a href="#quick">10 分钟快速上手</a></li>
+    <li><a href="#single">单课堂完整教程</a></li>
+    <li><a href="#ai-coding">AI 行为编码</a></li>
+    <li><a href="#human">人工复核与一致率</a></li>
+    <li><a href="#lsa">单课堂 LSA</a></li>
+    <li><a href="#multi">多课堂研究</a></li>
+    <li><a href="#understand">怎么看结果</a></li>
+    <li><a href="#stats">统计概念小抄</a></li>
+    <li><a href="#files">文件与目录</a></li>
+    <li><a href="#trouble">常见问题</a></li>
+    <li><a href="#privacy">隐私与合规</a></li>
+    <li><a href="#checklist">操作检查清单</a></li>
+    <li><a href="#writing">学术写作模板与样例</a></li>
+  </ol>
+</nav>
+
+<main>
+
+<section id="before" class="anchor">
+  <h2>1. 开始前先看</h2>
+  <p class="lead">如果你只想尽快跑通一节课，先读这一页，然后按“10 分钟快速上手”操作。</p>
+  <div class="warn">
+    <b>先确认三件事</b>
+    <ul>
+      <li>你有权处理这段课堂录音，并已获得学校、家长或监护人所需的授权。</li>
+      <li>如果要使用讯飞云端或 DeepSeek，请确认课堂音频和文本允许上传到相应服务。</li>
+      <li>不要把 API Key、学生姓名、家长联系方式等敏感信息放进截图、报告或公开仓库。</li>
+    </ul>
+  </div>
+  <div class="note">
+    <b>重要术语</b>
+    <ul>
+      <li><b>行为编码</b>：给一个 5 秒课堂窗口标一个主行为，例如“讲授”“提问”“学生应答”。</li>
+      <li><b>逐窗口编码</b>：每个 5 秒窗口一行，是 LSA 的输入。</li>
+      <li><b>LSA</b>：滞后序列分析，用来研究“一个行为后面更容易出现什么行为”。</li>
+      <li><b>多课堂</b>：把多节课分别计算转移，再做描述性汇总和比较，不是把多节课拼成一条长录音。</li>
+    </ul>
+  </div>
+</section>
+
+<section id="capability" class="anchor">
+  <h2>2. 系统能做什么、不能做什么</h2>
+  <div class="grid2">
+    <div class="card">
+      <h4>已经可以做</h4>
+      <ul>
+        <li>上传音频并转录为逐字稿；</li>
+        <li>人工修改逐字稿、说话人和片段；</li>
+        <li>用 DeepSeek 对 5 秒窗口做行为编码；</li>
+        <li>人工复核 AI 编码并计算一致率；</li>
+        <li>生成固定窗口的 LSA 频次、概率、残差和转换图；</li>
+        <li>建立多课堂研究项目，做联合描述、课堂比较、稳定性和 LOCO；</li>
+        <li>导出 CSV、HTML、SVG、PNG。</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h4>目前不能直接做</h4>
+      <ul>
+        <li>不能直接在界面上传 MP4/MOV 视频；需要先把视频转成音频。</li>
+        <li>不能一次批量转录多个视频；每节课单独处理。</li>
+        <li>AI 编码不是全自动流水线的一部分，需要你在“AI编码”页手动运行。</li>
+        <li>多课堂统计目前是描述性汇总，不提供课堂层级显著性检验。</li>
+        <li>不提供 SNA、ENA、复杂多层模型或因果推断。</li>
+      </ul>
+    </div>
+  </div>
+  <div class="note">
+    <b>视频转音频示例</b>
+    <p>如果只有视频，可先在外部用 ffmpeg 提取音频：</p>
+    <pre><code>ffmpeg -i lesson.mp4 -vn -ac 1 -ar 16000 lesson.wav</code></pre>
+    <p>然后在“开始转录”页上传 <code>lesson.wav</code>。</p>
+  </div>
+</section>
+
+<section id="prepare" class="anchor">
+  <h2>3. 安装与启动</h2>
+  <h3>3.1 目录</h3>
+  <p>项目根目录示例：</p>
+  <pre><code>D:\test\ClassroomResearchAI</code></pre>
+  <p>主要目录：</p>
+  <table>
+    <tr><th>路径</th><th>用途</th></tr>
+    <tr><td><code>my-project/</code></td><td>应用代码、虚拟环境和配置</td></tr>
+    <tr><td><code>my-project/.venv/</code></td><td>Python 虚拟环境</td></tr>
+    <tr><td><code>models/</code></td><td>本地 ASR、VAD、声纹、标点模型</td></tr>
+    <tr><td><code>results/ui_runs/</code></td><td>单课堂处理结果</td></tr>
+    <tr><td><code>studies/</code></td><td>多课堂研究项目和课堂注册表</td></tr>
+    <tr><td><code>results/studies/</code></td><td>多课堂分析结果</td></tr>
+    <tr><td><code>coding item/</code></td><td>默认编码体系和 Prompt 文档</td></tr>
+  </table>
+
+  <h3>3.2 配置 API Key</h3>
+  <p>在 <code>my-project/.env</code> 中配置：</p>
+  <pre><code>IFLYTEK_APP_ID=你的讯飞AppID
+IFLYTEK_API_KEY=你的讯飞APIKey
+IFLYTEK_API_SECRET=你的讯飞APISecret
+deepseek_api_key=你的DeepSeekKey</code></pre>
+  <div class="danger"><b>不要把 .env 发给别人，也不要提交到 Git。</b> 如果 Key 泄露，请到对应平台立即重置。</div>
+
+  <h3>3.3 启动界面</h3>
+  <ol class="steps">
+    <li>双击 <code>my-project\start_ui.bat</code>。</li>
+    <li>等待命令行出现本地地址，通常是 <code>http://localhost:8501</code>。</li>
+    <li>浏览器打开该地址。</li>
+    <li>第一次运行会加载模型，可能比之后慢很多。</li>
+  </ol>
+  <div class="tip"><b>建议</b>：先保持“本地 FunASR（默认）”跑通一节课，再测试“讯飞云端高精度”。</div>
+</section>
+
+<section id="quick" class="anchor">
+  <h2>4. 10 分钟快速上手</h2>
+  <ol class="steps">
+    <li>启动 UI，左侧选择“单课堂分析”。</li>
+    <li>在“开始转录”页上传一节课的音频。</li>
+    <li>保持默认：时间片段 5 秒、统计窗口 5 分钟；首次可关闭热词和纠正表。</li>
+    <li>点击“开始处理”，等待转录完成。</li>
+    <li>打开“逐字稿”和“片段与窗口”，快速检查文本和说话人。</li>
+    <li>如果文本有错，在“片段与窗口”修改并保存。</li>
+    <li>到“编码设置”确认编码体系和 Prompt；或使用默认文档。</li>
+    <li>到“AI编码”选择窗口 CSV，点击“开始 AI 编码”。</li>
+    <li>到“人工复核”抽查或修改编码，保存并查看一致率。</li>
+    <li>到“行为序列”查看频次、转换图和报告。</li>
+  </ol>
+</section>
+
+<section id="single" class="anchor">
+  <h2>5. 单课堂完整教程</h2>
+
+  <h3>5.1 选择识别引擎</h3>
+  <p>“开始转录”页顶部有“识别引擎”：</p>
+  <table>
+    <tr><th>模式</th><th>适合什么情况</th><th>代价/限制</th></tr>
+    <tr><td><b>本地 FunASR（默认）</b></td><td>离线、隐私敏感、没有 API 额度</td><td>需要本地 GPU；速度取决于电脑</td></tr>
+    <tr><td><b>讯飞云端高精度</b></td><td>希望文字更准，允许上传音频</td><td>需要讯飞 Key、网络和额度；不保留单个学生编号</td></tr>
+  </table>
+
+  <h3>5.2 上传音频与参数</h3>
+  <ul>
+    <li>一次只上传一节课音频。</li>
+    <li>推荐 16 kHz、单声道 WAV；其他格式会由 ffmpeg 处理。</li>
+    <li><b>时间片段</b>：建议 5 秒。这个值决定窗口长度，后续最好保持一致。</li>
+    <li><b>统计窗口</b>：建议 5 分钟，用于生成 5 分钟统计表。</li>
+    <li><b>教师说话人编号</b>：默认 <code>S01</code>。</li>
+    <li><b>预设说话人数</b>：本地模式可设 9；不确定就设 0。</li>
+  </ul>
+  <div class="note"><b>重复音频提示</b>：如果系统提示 SHA256 相同的音频已经处理过，先确认是不是重复上传。若要比较本地和讯飞，系统允许不同引擎分别生成结果。</div>
+
+  <h3>5.3 转录完成后的检查</h3>
+  <p>结果会保存在：</p>
+  <pre><code>results/ui_runs/&lt;运行编号&gt;/</code></pre>
+  <p>建议按顺序看：</p>
+  <ol>
+    <li><b>逐字稿</b>：通读是否漏句、错词、说话人错位。</li>
+    <li><b>片段与窗口</b>：检查 5 秒窗口的 <code>窗口长度_s</code> 和 <code>有效语音_s</code>。窗口长度应始终是 5 秒，有效语音可以小于 5 秒。</li>
+    <li><b>统计</b>：看教师/学生占比是否大致合理。</li>
+  </ol>
+
+  <h3>5.4 人工修订逐字稿</h3>
+  <p>在“片段与窗口”的“说话人片段”表中可以修改：</p>
+  <ul>
+    <li>说话人编号；</li>
+    <li>角色；</li>
+    <li>文字内容。</li>
+  </ul>
+  <p>修改后点击“保存修改并重新生成”。系统会生成备份，例如：</p>
+  <pre><code>lesson_segments_before_edit.jsonl</code></pre>
+  <div class="warn"><b>注意</b>：修改逐字稿后，之前生成的 AI 编码不会自动更新。你需要重新运行 AI 编码，才能让编码基于新的文本。</div>
+</section>
+
+<section id="ai-coding" class="anchor">
+  <h2>6. AI 行为编码</h2>
+  <p>AI 编码不是转录流程自动完成的，需要单独进入“AI编码”页。</p>
+
+  <h3>6.1 先准备编码体系与 Prompt</h3>
+  <p>到“编码设置”页：</p>
+  <ol>
+    <li>上传编码体系文档（.docx / .txt / .md）；</li>
+    <li>上传编码 Prompt（.docx / .txt / .md）；</li>
+    <li>点击“保存上传文件并设为当前”；</li>
+    <li>在预览区确认内容没有被截断或读错。</li>
+  </ol>
+  <p>默认文档位于：</p>
+  <pre><code>coding item/小学习作课程编码系统.docx
+coding item/AI课堂行为编码+prompt.docx</code></pre>
+
+  <h3>6.2 选择窗口文件</h3>
+  <p>“AI编码”页会让你选择固定窗口 CSV。常见选择：</p>
+  <table>
+    <tr><th>文件</th><th>说明</th></tr>
+    <tr><td><code>03_iflytek_classroom/lesson_window_5s_fixed.csv</code></td><td>讯飞课堂部分的窗口，常用</td></tr>
+    <tr><td><code>03_iflytek/lesson_window_5s_fixed.csv</code></td><td>包含末尾附加内容的完整窗口</td></tr>
+    <tr><td><code>10_phrase_split/lesson_window_5s_fixed.csv</code></td><td>本地结果，含齐读后处理</td></tr>
+  </table>
+  <p>默认会优先选择 <code>03_iflytek_classroom</code>。</p>
+
+  <h3>6.3 编码设置</h3>
+  <ul>
+    <li><b>模型</b>：默认 <code>deepseek-chat</code>。</li>
+    <li><b>每批窗口数</b>：默认 60，通常不需要改。</li>
+    <li><b>前后上下文窗口数</b>：默认 2，用于帮助模型判断行为功能。</li>
+    <li><b>调试：只编码前 N 个窗口</b>：只用于测试，正式分析填 0。</li>
+  </ul>
+  <p>点击“开始 AI 编码”，等待批次完成。</p>
+
+  <h3>6.4 生成的文件</h3>
+  <p>最重要的文件：</p>
+  <pre><code>lesson_ai_codes.csv</code></pre>
+  <p>它通常位于所选窗口 CSV 的同一目录，例如：</p>
+  <pre><code>results/ui_runs/20261022_073434/03_iflytek_classroom/lesson_ai_codes.csv</code></pre>
+  <p>同时还会生成：</p>
+  <ul>
+    <li><code>lesson_ai_code_summary.csv</code>：编码频次；</li>
+    <li><code>lesson_ai_code_review.csv</code>：低置信度或角色冲突；</li>
+    <li><code>lesson_ai_code_sequence.txt</code>：行为序列；</li>
+    <li><code>lesson_ai_code_metadata.json</code>：模型、窗口来源、Token 用量等。</li>
+  </ul>
+
+  <h3>6.5 lesson_ai_codes.csv 字段</h3>
+  <table>
+    <tr><th>字段</th><th>含义</th></tr>
+    <tr><td><code>window_id</code></td><td>窗口编号</td></tr>
+    <tr><td><code>start_hms</code> / <code>end_hms</code></td><td>窗口起止时间</td></tr>
+    <tr><td><code>duration_s</code></td><td>窗口长度，通常 5 秒</td></tr>
+    <tr><td><code>speech_s</code></td><td>窗口内有效语音秒数</td></tr>
+    <tr><td><code>dominant_role</code></td><td>主要说话人角色</td></tr>
+    <tr><td><code>text</code></td><td>窗口文本</td></tr>
+    <tr><td><code>code</code></td><td>A–P 主编码</td></tr>
+    <tr><td><code>code_name</code></td><td>编码名称</td></tr>
+    <tr><td><code>confidence</code></td><td>High / Medium / Low</td></tr>
+    <tr><td><code>role_conflict</code></td><td>AI 编码与说话人角色是否冲突</td></tr>
+    <tr><td><code>alternative_code</code></td><td>备选编码</td></tr>
+    <tr><td><code>secondary_codes</code></td><td>窗口内次要编码</td></tr>
+    <tr><td><code>reason</code></td><td>编码理由</td></tr>
+  </table>
+  <div class="tip"><b>重要</b>：多课堂和 LSA 真正需要的是 <code>code</code>、<code>window_id</code> 和时间字段；其他字段用于复核和解释。</div>
+</section>
+
+<section id="human" class="anchor">
+  <h2>7. 人工复核与一致率</h2>
+  <p>“人工复核”页用于把 AI 编码变成可检查的人工编码，而不是直接修改 AI 文件。</p>
+
+  <h3>7.1 两种做法</h3>
+  <ol>
+    <li><b>全部接受再修改</b>：点击“接受全部 AI 编码为人工初值”，然后只改不同意的地方。适合快速复核。</li>
+    <li><b>从空白开始</b>：人工编码留空，只填写你真正检查过的窗口。适合严格复核部分样本。</li>
+  </ol>
+
+  <h3>7.2 保存后会发生什么</h3>
+  <p>系统会生成独立文件：</p>
+  <pre><code>lesson_human_codes.csv</code></pre>
+  <p>不会覆盖 <code>lesson_ai_codes.csv</code>。同时计算：</p>
+  <ul>
+    <li>总体一致率；</li>
+    <li>Cohen's κ；</li>
+    <li>AI 高置信度子集一致率；</li>
+    <li>混淆矩阵；</li>
+    <li>不一致窗口清单。</li>
+  </ul>
+  <div class="warn"><b>注意</b>：只有填写了 A–P 的窗口才进入一致率计算。人工文件存在，不等于所有窗口都复核完成。</div>
+
+  <h3>7.3 怎么看 κ</h3>
+  <table>
+    <tr><th>κ</th><th>大致含义</th></tr>
+    <tr><td>&lt; 0</td><td>差</td></tr>
+    <tr><td>0–0.20</td><td>轻微一致</td></tr>
+    <tr><td>0.21–0.40</td><td>一般</td></tr>
+    <tr><td>0.41–0.60</td><td>中等</td></tr>
+    <tr><td>0.61–0.80</td><td>较强</td></tr>
+    <tr><td>0.81–1.00</td><td>几乎完全一致</td></tr>
+  </table>
+</section>
+
+<section id="lsa" class="anchor">
+  <h2>8. 单课堂 LSA：行为序列分析</h2>
+  <p>“行为序列”页把 <code>lesson_ai_codes.csv</code> 或人工复核编码转换成行为转移分析。</p>
+
+  <h3>8.1 先理解分析单位</h3>
+  <div class="note">
+    <b>固定窗口状态</b>：一行 = 一个 5 秒窗口；连续相同编码表示状态持续，不会被自动合并；自转移不会被删除。
+  </div>
+
+  <h3>8.2 选择编码来源</h3>
+  <ul>
+    <li><b>AI 编码</b>：探索性分析，速度快；</li>
+    <li><b>人工复核（仅已复核窗口）</b>：只使用已填写人工编码的窗口；</li>
+    <li><b>人工复核 + AI 补全</b>：人工优先，空白处用 AI 补。</li>
+  </ul>
+  <p>如果当前文件没有 <code>sequence_id</code>，需要确认它是不是一段连续观察记录。只有确认后才能继续，否则可能跨片段生成错误转移。</p>
+
+  <figure>
+    <img src="images/single_window.png" alt="行为序列页面">
+    <figcaption>行为序列页：选择编码来源、确认序列边界、设置统计推断方式和 Monte Carlo 参数。</figcaption>
+  </figure>
+
+  <h3>8.3 两种视角</h3>
+  <table>
+    <tr><th>视角</th><th>用途</th></tr>
+    <tr><td>A 固定窗口状态</td><td>正式 LSA：窗口数、转移数、自转移、概率、残差、显著性</td></tr>
+    <tr><td>B 合并状态段（仅描述）</td><td>把连续同码合并成状态段，查看持续时间、状态段转移；不显示 p 值</td></tr>
+  </table>
+
+  <h3>8.4 统计推断方式</h3>
+  <ul>
+    <li><b>经典 LSA：Holm 校正</b>：默认推荐，控制多重比较；</li>
+    <li><b>经典 LSA：BH-FDR</b>：控制错误发现率；</li>
+    <li><b>经典 LSA：原始 p</b>：未校正，只适合探索；</li>
+    <li><b>Monte Carlo：Holm / BH</b>：序列内随机排列零假设，不保留原始自相关。</li>
+  </ul>
+  <div class="warn"><b>不要</b>把不同推断方式的显著数量直接相加。它们对应不同零假设和校正规则。</div>
+  <div class="note"><b>负向显著的处理规则</b>：`Z ≤ -1.96` 的负向显著结果只保留在诊断表中，不进入主显著表、主图和论文研究发现；它仍然可以在方法审计中查看。</div>
+
+  <h3>8.5 如何读主要结果</h3>
+  <table>
+    <tr><th>表/指标</th><th>含义</th></tr>
+    <tr><td>行为频次</td><td>各编码出现多少个窗口</td></tr>
+    <tr><td>转移频数</td><td>行行为后面紧邻列行为的次数</td></tr>
+    <tr><td>条件转移概率</td><td><code>P(j|i)=Oij/Ri</code>，给定 i 后出现 j 的比例</td></tr>
+    <tr><td>期望频数</td><td>若没有特殊关联，理论上应出现多少次</td></tr>
+    <tr><td>调整后残差 Z</td><td>实际与期望的差异，正值表示高于期望</td></tr>
+    <tr><td>E&lt;5</td><td>期望频数过低，正态近似不可靠；不等于不显著</td></tr>
+    <tr><td>NA</td><td>该单元不可定义，不能当作 0</td></tr>
+  </table>
+
+  <h3>8.6 图形筛选</h3>
+  <p>图形可以筛选：显示自转移、最低频数、最低概率、节点标签、编码字典。筛选只影响图，不改变统计表。</p>
+  <figure>
+    <img src="images/single_graph.png" alt="单课堂转换图">
+    <figcaption>示例：行为序列页的转换图。蓝色实线为正向显著，橙色点线表示期望频数小于 5。</figcaption>
+  </figure>
+
+  <h3>8.7 导出报告</h3>
+  <p>在行为序列页点击“生成 HTML 研究报告”，可导出包含数据单位、方法、显著转移、稀疏诊断、敏感性、限制和复现参数的 HTML。</p>
+</section>
+
+<section id="multi" class="anchor">
+  <h2>9. 多课堂研究</h2>
+  <p>左侧切换到“多课堂分析”。多课堂的目标是研究同一教师或同一研究项目下的多节课，不是把多节课拼成一条长录音。</p>
+
+  <figure>
+    <img src="images/multi_project.png" alt="多课堂研究项目">
+    <figcaption>多课堂页面：从已完成课堂选择，或导入外部 CSV。</figcaption>
+  </figure>
+
+  <h3>9.1 从已完成课堂创建（推荐）</h3>
+  <ol class="steps">
+    <li>先完成每节课堂的转录和 AI 编码。</li>
+    <li>进入“多课堂分析” → “研究项目”。</li>
+    <li>点击“刷新课堂注册表”。</li>
+    <li>系统会扫描 <code>results/ui_runs/</code>，列出已完成的课堂。</li>
+    <li>勾选需要的课堂。</li>
+    <li>编辑显示名称；选择编码来源（AI 或已完成的人工复核）。</li>
+    <li>选择新建研究项目，或追加到已有项目。</li>
+    <li>点击“从所选课堂创建 / 追加研究项目”。</li>
+  </ol>
+
+  <div class="note">
+    <b>课堂编号 class_id</b>默认使用稳定的运行编号。你可以改显示名称，但不要随意改 class_id，否则会破坏追溯关系。
+  </div>
+
+  <h3>9.2 为什么需要手动确认编码来源</h3>
+  <p>同一节课可能同时有：</p>
+  <ul>
+    <li><code>lesson_ai_codes.csv</code>：AI 编码；</li>
+    <li><code>lesson_human_codes.csv</code>：人工复核编码。</li>
+  </ul>
+  <p>系统不会自动假设人工复核已经全部完成。只有人工复核覆盖全部窗口时，才推荐作为 human 来源；部分复核不能直接参与正式联合分析。</p>
+
+  <h3>9.3 导入外部 CSV</h3>
+  <p>外部研究者的 CSV 如果字段名不同，可使用“方式 B：导入外部 CSV（字段映射）”：</p>
+  <ul>
+    <li>选择行为编码字段；</li>
+    <li>选择时间字段和时间类型（<code>start_hms</code> 或 <code>start_ms</code>）；</li>
+    <li>选择窗口编号、片段编号、窗口长度字段；</li>
+    <li>如果没有片段编号，确认文件是一段连续完整观察；</li>
+    <li>确认映射预览后导入。</li>
+  </ul>
+  <p>系统会生成规范化副本，不修改你的原始 CSV。</p>
+
+  <h3>9.4 维护已有研究项目</h3>
+  <p>在“已导入研究项目”区域可以：</p>
+  <ul>
+    <li>查看已加入课堂；</li>
+    <li>追加课堂；</li>
+    <li>移除课堂；</li>
+    <li>修改课堂显示名称；</li>
+    <li>重新运行联合分析；</li>
+    <li>打开来源课堂的单课堂分析。</li>
+  </ul>
+  <p>移除课堂不会删除原始数据，也不会删除历史分析结果。</p>
+
+  <h3>9.5 三种多课堂视角</h3>
+  <table>
+    <tr><th>视角</th><th>回答的问题</th></tr>
+    <tr><td>联合概览</td><td>把所有课堂的转移机会汇总后，整体行为频次和转移概率是什么？</td></tr>
+    <tr><td>课堂比较</td><td>某个转移 A→B 在不同课堂中的频次、概率和排名如何？</td></tr>
+    <tr><td>稳定性 / LOCO</td><td>这个转移在多少课堂出现？去掉一节课后结论变化多大？</td></tr>
+  </table>
+
+  <div class="warn">
+    <b>统计边界</b>：多课堂联合结果是描述性汇总，尚未提供课堂层级聚类或多层模型的显著性推断。不要把它当成“多课堂联合显著性”。
+  </div>
+
+  <h3>9.6 两种汇总权重</h3>
+  <ul>
+    <li><b>按转移机会加权</b>：<code>Σ Ocij / Σ Rci</code>，长课堂贡献更多转移机会。</li>
+    <li><b>课堂等权平均</b>：每个有效课堂先算 <code>Pc(j|i)</code>，再平均；没有出现起始行为的课堂不参与该行平均。</li>
+  </ul>
+  <p>两种结果可能不同，应该同时报告，而不是只挑一个。</p>
+</section>
+
+<section id="understand" class="anchor">
+  <h2>10. 怎么看结果</h2>
+  <figure>
+    <img src="images/multi_overview.png" alt="多课堂联合概览">
+    <figcaption>联合概览：课堂数、独立序列、观察窗口、有效转移，以及联合行为频次。</figcaption>
+  </figure>
+
+  <h3>10.1 推荐阅读顺序</h3>
+  <ol>
+    <li>先看数据质量：课堂数、窗口数、转移数、缺失值、时间顺序。</li>
+    <li>再看行为频次：哪些行为最常见。</li>
+    <li>再看条件转移概率：从某个行为后最常出现什么。</li>
+    <li>最后看校正后的显著转移和图形。</li>
+  </ol>
+
+  <h3>10.2 不要这样解释</h3>
+  <ul>
+    <li>“显著相关”不等于“因果影响”。</li>
+    <li>“E&lt;5”不等于“不显著”，只表示正态近似需要谨慎。</li>
+    <li>“多课堂都出现”不等于“统计上稳定”。</li>
+    <li>单课堂结果不能直接推广到所有课堂或所有教师。</li>
+    <li>B 视角的状态段概率不是每 5 秒窗口的概率。</li>
+  </ul>
+</section>
+
+<section id="stats" class="anchor">
+  <h2>11. 统计概念小抄</h2>
+  <details open>
+    <summary>转移频数 Oij 是什么？</summary>
+    <p>在当前课堂序列中，行为 i 后紧邻出现行为 j 的次数。Lag 1 表示相邻窗口；Lag 2 表示隔一个窗口。</p>
+  </details>
+  <details>
+    <summary>条件转移概率 P(j|i) 是什么？</summary>
+    <p>只看出自行为 i 的转移中，有多大比例去了 j。公式是 <code>Oij / Ri</code>。它不是 j 在所有行为中的总比例。</p>
+  </details>
+  <details>
+    <summary>调整后残差 Z 是什么？</summary>
+    <p>实际频数 O 与期望频数 E 的差异，经过行/列边际和样本量调整后的标准化值。正数表示比随机期望更常出现，负数表示更少出现。</p>
+  </details>
+  <details>
+    <summary>Holm 和 BH 有什么区别？</summary>
+    <p>Holm 控制“至少出现一次错误拒绝”的概率，更严格；BH-FDR 控制错误发现率，通常保留更多结果。两者都不是因果检验。</p>
+  </details>
+  <details>
+    <summary>Monte Carlo 在做什么？</summary>
+    <p>在每条序列内部随机打乱行为顺序，保持频数和长度，重新计算转移。它回答“观察到的转移是否偏离随机排列”。它不保留原始自相关。</p>
+  </details>
+  <details>
+    <summary>为什么很多结果是 NA？</summary>
+    <p>当某行为从未作为起点、期望频数为 0 或分母为 0 时，调整后残差没有定义。NA 不是 0，也不是“没有关系”。</p>
+  </details>
+  <details>
+    <summary>自转移是什么？</summary>
+    <p>行为 i 后面仍然是 i，例如 F→F。它表示讲授、指示或学生应答的持续性。当前分析不会删除自转移。</p>
+  </details>
+</section>
+
+<section id="files" class="anchor">
+  <h2>12. 文件与目录</h2>
+  <h3>12.1 单课堂 run</h3>
+  <pre><code>results/ui_runs/&lt;run_id&gt;/
+├── lesson.wav
+├── settings.json
+├── 03_iflytek_classroom/
+│   ├── lesson_window_5s_fixed.csv
+│   ├── lesson_ai_codes.csv
+│   ├── lesson_ai_code_metadata.json
+│   ├── lesson_human_codes.csv
+│   ├── lesson_ai_human_agreement.json
+│   └── behavior_sequence_v02c/
+└── ...</code></pre>
+  <p><code>settings.json</code> 记录音频文件名、SHA256、引擎、窗口长度等；<code>lesson_ai_codes.csv</code> 是行为编码主文件。</p>
+
+  <h3>12.2 多课堂 study</h3>
+  <pre><code>studies/&lt;study_id&gt;/
+├── study_manifest.json
+└── classes/
+    └── &lt;class_id&gt;/lesson_ai_codes.csv
+
+results/studies/&lt;study_id&gt;/lsa_v03/&lt;run_id&gt;/
+├── analysis_metadata.json
+├── classroom_summary.csv
+├── pooled_transition_counts.csv
+├── pooled_transition_probabilities.csv
+├── equal_weight_transition_probabilities.csv
+├── transition_stability.csv
+├── leave_one_class_out.csv
+└── multi_classroom_report.html</code></pre>
+
+  <h3>12.3 课堂注册表</h3>
+  <pre><code>studies/classroom_registry.json</code></pre>
+  <p>这是系统扫描 <code>results/ui_runs/</code> 得到的课堂索引。它不会修改原始 CSV。</p>
+
+  <h3>12.4 当前项目中的示例</h3>
+  <table>
+    <tr><th>用途</th><th>路径</th></tr>
+    <tr><td>真实单课堂示例</td><td><code>results/ui_runs/20261022_073434/03_iflytek_classroom/</code></td></tr>
+    <tr><td>单课堂 HTML 报告</td><td><code>.../behavior_sequence_v02c/lesson_report_holm.html</code></td></tr>
+    <tr><td>三课堂合成演示</td><td><code>studies/teacher_case_synthetic/</code></td></tr>
+    <tr><td>多课堂 HTML 报告</td><td><code>results/studies/teacher_case_synthetic/lsa_v03/&lt;run_id&gt;/multi_classroom_report.html</code></td></tr>
+    <tr><td>课堂注册表</td><td><code>studies/classroom_registry.json</code></td></tr>
+  </table>
+  <div class="warn"><b>合成数据只用于演示工作流。</b>不要把 <code>teacher_case_synthetic</code> 当作真实课堂研究结果。</div>
+</section>
+
+<section id="trouble" class="anchor">
+  <h2>13. 常见问题</h2>
+
+  <h3>启动后页面空白/一直加载</h3>
+  <ul>
+    <li>先看命令行是否仍在加载模型；</li>
+    <li>确认 <code>http://localhost:8501</code> 没有被其他程序占用；</li>
+    <li>检查 <code>my-project/.env</code> 是否存在且格式正确。</li>
+  </ul>
+
+  <h3>提示缺少 API Key</h3>
+  <ul>
+    <li>讯飞模式需要 AppID、APIKey、APISecret；</li>
+    <li>AI 编码需要 DeepSeek Key；</li>
+    <li>修改 <code>.env</code> 后重启 UI。</li>
+  </ul>
+
+  <h3>AI 编码失败或编码数量不足</h3>
+  <ul>
+    <li>检查 DeepSeek 余额/网络；</li>
+    <li>确认窗口 CSV 有 <code>window_id</code>、<code>text</code> 和时间字段；</li>
+    <li>先用“只编码前 10 个窗口”做小测试。</li>
+  </ul>
+
+  <h3>多课堂页面看不到已完成课堂</h3>
+  <ul>
+    <li>确认那节课已经完成 AI 编码；</li>
+    <li>点击“刷新课堂注册表”；</li>
+    <li>检查 <code>results/ui_runs/</code> 下是否有 <code>*_ai_codes.csv</code>；</li>
+    <li>缺少元数据时仍可能被发现，但编码体系会显示 <code>unknown</code>。</li>
+  </ul>
+
+  <h3>多课堂无法合并</h3>
+  <ul>
+    <li>检查课堂是否使用了不同编码体系；</li>
+    <li>检查窗口长度是否一致；</li>
+    <li>检查是否有重复 class_id 或重复文件；</li>
+    <li>检查没有 sequence_id 的课堂是否确认了连续序列。</li>
+  </ul>
+
+  <h3>人工复核无法作为多课堂来源</h3>
+  <p>人工复核必须覆盖该课堂全部窗口。部分复核可以选择 AI 编码，或先补全复核。</p>
+
+  <h3>图里看不到边</h3>
+  <ul>
+    <li>当前方法下可能没有显著转移；</li>
+    <li>最低频数/最低概率筛选可能太严格；</li>
+    <li>自转移可能被隐藏；</li>
+    <li>检查 E&lt;5 的橙色点线是否因为筛选被隐藏。</li>
+  </ul>
+
+  <h3>“窗口长度 2.44/4.77”是什么</h3>
+  <p>那不是窗口长度，而是 <code>有效语音_s</code>。窗口长度始终是 5 秒；有效语音会因为停顿、静音而小于 5 秒。</p>
+</section>
+
+<section id="privacy" class="anchor">
+  <h2>14. 隐私与合规</h2>
+  <ul>
+    <li>课堂录音可能包含未成年人声音，属于敏感数据；</li>
+    <li>使用本地模式时音频不离开电脑；</li>
+    <li>使用讯飞或 DeepSeek 时，音频/文本会发送到云端，必须获得授权；</li>
+    <li>不要把真实姓名直接写进编码 CSV；建议使用匿名编号；</li>
+    <li>导出报告前检查是否包含学生姓名、学校名称或其他可识别信息；</li>
+    <li>共享结果时优先共享聚合表，不共享原始音频。</li>
+  </ul>
+</section>
+
+<section id="checklist" class="anchor">
+  <h2>15. 操作检查清单</h2>
+  <h3>单课堂</h3>
+  <ul>
+    <li>音频已获得授权；</li>
+    <li>窗口长度确认是 5 秒；</li>
+    <li>逐字稿已检查；</li>
+    <li>编码体系和 Prompt 是当前研究版本；</li>
+    <li>AI 编码已生成；</li>
+    <li>低置信度/角色冲突已复核；</li>
+    <li>人工复核文件与 AI 文件没有混淆；</li>
+    <li>LSA 报告包含统计限制。</li>
+  </ul>
+  <h3>多课堂</h3>
+  <ul>
+    <li>每节课是独立课堂；</li>
+    <li>同一课堂的多个片段有 sequence_id；</li>
+    <li>编码体系一致；</li>
+    <li>窗口长度一致；</li>
+    <li>选择 AI 或完整人工复核作为编码来源；</li>
+    <li>检查课堂注册表和 SHA256；</li>
+    <li>没有把合成数据混入正式研究；</li>
+    <li>报告明确“描述性汇总、未做课堂层级显著性推断”。</li>
+  </ul>
+  <div class="tip"><b>建议</b>：正式研究至少保留一份 HTML 报告、一份 CSV 结果、一份元数据 JSON 和一份输入文件哈希记录，方便日后复现。</div>
+</section>
+
+<section id="writing" class="anchor">
+  <h2>16. 学术写作模板与样例</h2>
+  <p class="lead">下面不是“自动生成结论”，而是可以直接改写的论文段落模板。所有数字都应从你的实际报告和 CSV 中核对；方括号 <span class="placeholder">[ ]</span> 表示需要替换的研究信息。</p>
+
+  <div class="warn">
+    <b>写作前先确认</b>
+    <ul>
+      <li>你使用的是 AI 编码、人工复核编码，还是“人工优先 + AI 补全”？论文中必须说明。</li>
+      <li>你报告的是固定 5 秒窗口状态转移，还是合并后的状态段；两者不能混写。</li>
+      <li>显著转移只能写成“关联/偏离期望”，不能写成“导致”“促进”“证明有效”。</li>
+      <li>E&lt;5 的显著单元必须加限制说明，不能当作强证据。</li>
+    </ul>
+  </div>
+
+  <h3>16.1 方法部分模板：单课堂 LSA</h3>
+  <div class="sample">
+    <p>本研究以 <span class="placeholder">[学校/年级/课例名称]</span> 的一节 <span class="placeholder">[学科/课型]</span> 课堂录像为个案，使用 ClassroomResearchAI（LSA V0.2c/V0.3.1）完成音频转录、文本校对、行为编码与滞后序列分析。首先将课堂音频按固定 <span class="placeholder">5</span> 秒窗口切分，共得到 <span class="placeholder">437</span> 个观察窗口；随后依据 <span class="placeholder">[编码体系名称]</span>，对每个窗口赋予 A–P 中的一个主行为编码。编码先由 DeepSeek 模型生成初稿，再由研究者进行人工复核；本研究最终使用的是 <span class="placeholder">[AI 初编码 / 人工复核编码 / 人工优先+AI补全]</span>。</p>
+    <p>在序列分析中，以相邻窗口构成 Lag 1 行为转移，共得到 <span class="placeholder">436</span> 次有效转移。对每个有向转移单元计算观察频数 <code>Oij</code>、条件转移概率 <code>P(j|i)=Oij/Ri</code>、期望频数 <code>Eij=Ri×Cj/N</code>，以及调整后残差：</p>
+    <pre><code>Zij = (Oij - Eij) / sqrt(Eij × (1 - Ri/N) × (1 - Cj/N))</code></pre>
+    <p>多重比较采用 Holm 校正；校正族为所有具有可定义统计量的有向转移单元，共 <span class="placeholder">90</span> 个，<span class="placeholder">10</span> 个不可定义单元不参与校正。另以 10,000 次序列内随机排列进行 Monte Carlo 检验，随机排列保持每条序列的长度与编码频数不变。所有分析同时保留原始窗口结果，不以合并状态段结果替代原始结果。</p>
+  </div>
+  <p class="muted">如果论文还报告多课堂分析，请把下一段接在方法部分，并明确多课堂部分仅做描述性汇总。</p>
+
+  <h3>16.2 结果部分样例：当前真实单课堂</h3>
+  <p>以下数字来自当前项目中的真实课堂示例 <code>20261022_073434/03_iflytek_classroom</code>，可以作为改写骨架；正式论文应替换为你自己的课例。</p>
+  <div class="sample">
+    <p>该课堂共切分为 437 个 5 秒窗口，产生 436 次 Lag 1 行为转移，实际观察到 10 类行为。行为频次最高的是“应答（被动反应）”（J，133 次，30.43%），其次为“指示”（G，86 次，19.68%）、“提问开放性问题”（D，60 次，13.73%）和“讲授”（F，58 次，13.27%）。自转移 163 次，占 37.39%；非自转移 273 次，占 62.61%，说明课堂行为序列中存在一定程度的状态持续性。</p>
+    <p>在经典 LSA 中，全部 90 个可检验单元进入 Holm 校正。按照本研究预先规定的规则，只有正向显著转移进入主结果；负向显著（Z ≤ -1.96）仅保留在诊断表中，不作为研究发现解释。校正后共有 9 条正向转移达到统计显著。其中，六种方法共同识别出 5 条转移：F→F、G→G、I→I、J→B、J→J。具体而言，F→F 的观察频数为 27，条件转移概率为 0.47，调整后残差为 8.01；J→J 的观察频数为 70，条件转移概率为 0.53，调整后残差为 6.65；J→B 的观察频数为 20，条件转移概率为 0.15，调整后残差为 4.46。</p>
+    <p>从解释上看，本课堂的序列结构主要表现为教师讲授/指示的持续，以及学生被动应答后的继续应答和教师鼓励。上述结果描述的是本课堂中的正向行为关联，不构成教学有效性或因果关系的证据。</p>
+  </div>
+  <div class="warn"><b>必须补上的结果限制</b>：9 条 Holm 正向显著转移中，E→E、I→I、B→F 的期望频数小于 5，正态近似可靠性有限。论文中应报告这些单元的 <code>expected_lt_5</code> 标记，并说明其解释应更谨慎。负向显著不进入主结果，但仍保留在诊断表中供审计。</div>
+
+  <h3>16.3 讨论部分模板</h3>
+  <div class="sample">
+    <p>从行为序列角度看，本课例中教师讲授（F）和指示（G）具有较明显的自转移，反映出课堂在较长时段内保持教师主导的活动结构；学生被动应答（J）之后较常出现教师鼓励（B），同时 J→J 也较突出，说明学生连续应答与教师即时反馈可能构成该课堂的重要互动片段。结合课堂语境，这可能与本节课以教师讲解、点名回答和集体朗读为主的组织方式有关，但仅凭行为序列不能证明这种教学组织方式带来了更高的学习效果。</p>
+    <p>因此，本文将上述模式视为该课例的描述性互动特征，而非教师教学能力的评价结论，也不将其外推为所有同类课堂的普遍规律。</p>
+  </div>
+
+  <h3>16.4 局限性部分模板</h3>
+  <div class="sample">
+    <p>本研究存在以下限制。第一，分析单位为固定 5 秒窗口中的主行为编码，而非具有自然起止时间的行为事件；连续相同编码被保留为状态持续，未合并为事件序列。第二，当前仅分析一条课堂观察序列，结果不能直接推广到其他课堂、其他教师或更广泛的教学群体。第三，相邻窗口共享观察时段，转移之间并非完全独立；虽然使用了 Holm 校正和序列内随机排列，但仍不能等同于考虑了全部课堂层级依赖的推断。第四，部分转移单元的期望频数较小，正态近似的可靠性有限；Monte Carlo 零假设也不保留原始序列的自相关结构。第五，AI 编码仅作为辅助，人工复核的覆盖范围有限，编码一致性仍可能影响结果。最后，显著转移只表示观察频数偏离随机期望，不能解释为因果关系或教学效果。</p>
+  </div>
+
+  <h3>16.5 多课堂方法模板</h3>
+  <div class="sample">
+    <p>多课堂分析以 <span class="placeholder">[8]</span> 节课堂为独立观察序列，每节课堂分别按固定 5 秒窗口生成行为编码，并在课堂内部的独立观察片段中计算 Lag 1 转移。设第 c 节课的转移矩阵为 <code>Tc</code>，联合转移矩阵为 <code>Ttotal = Σc Tc</code>；联合条件转移概率按转移机会加权：</p>
+    <pre><code>P_pooled(j|i) = Σc Ocij / Σc Rci</code></pre>
+    <p>同时计算课堂等权平均：</p>
+    <pre><code>P_equal(j|i) = mean_{c: Rci > 0} Pc(j|i)</code></pre>
+    <p>没有出现起始行为 i 的课堂不参与该行平均。多课堂结果用于描述性比较、跨课堂稳定性和 Leave-One-Class-Out 敏感性分析；本阶段不将多课堂数据拼接为一条长序列，也不报告经过课堂层级依赖调整的显著性检验。</p>
+  </div>
+
+  <h3>16.6 多课堂结果模板（合成演示，仅作格式示例）</h3>
+  <p>下面的数字来自项目的三课堂合成演示数据，<b>不是真实课堂研究结论</b>。它只展示论文中如何报告 pooled 与 equal-weight 两种汇总。</p>
+  <div class="sample">
+    <p>三课堂合成演示数据包含 3 节课堂、4 条独立观察序列、17 个观察窗口和 13 次 Lag 1 转移。联合转移频数矩阵如下：</p>
+    <pre><code>     A  B  C
+A    0  3  2
+B    1  1  3
+C    2  1  0</code></pre>
+    <p>联合条件概率与课堂等权概率被分别计算并报告。A→B 的 pooled 概率为 0.60，而课堂等权概率为 0.583；A 行只有 2 节课堂出现起始行为 A，因此等权平均的有效课堂数为 2。两种结果存在差异，说明课堂长度和转移机会会影响汇总结果，不能只报告其中一种。该演示只用于验证多课堂工作流，不用于推断真实教师的教学模式。</p>
+  </div>
+
+  <h3>16.7 图表标题模板</h3>
+  <ul>
+    <li><b>表题</b>：固定 5 秒窗口下的行为频次与条件转移概率（Lag 1，N=<span class="placeholder">436</span>）。</li>
+    <li><b>图题</b>：Holm 校正后正向显著行为转移图；橙色点线表示期望频数小于 5。负向显著不进入主图。</li>
+    <li><b>表注</b>：E&lt;5 的单元以 * 标记；NA 表示调整后残差不可定义；显著性基于双侧正态近似并经 Holm 校正。</li>
+  </ul>
+
+  <h3>16.8 改写时的“不要写”清单</h3>
+  <ul>
+    <li>不要写“证明了教师提问能提高学生成绩”——当前数据没有成绩或因果识别。</li>
+    <li>不要写“所有优秀教师都呈现该模式”——当前只有一个课例或少量课堂。</li>
+    <li>不要写“AI 编码完全客观”——AI 编码需要人工复核和一致性报告。</li>
+    <li>不要写“Monte Carlo 检验保留了课堂自相关”——当前零假设是序列内随机排列，不保留自相关。</li>
+    <li>不要把 B 视角的状态段概率写成“每 5 秒转移概率”。</li>
+  </ul>
+</section>
+
+</main>
+</div>
+
+<footer>
+  <p>ClassroomResearchAI 使用教程 · 生成日期 2026-10-22 · 本教程描述的是当前代码版本的工作流；统计结果解释请同时参考项目审计报告。</p>
+</footer>
+</body>
+</html>

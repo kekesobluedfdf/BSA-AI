@@ -1,0 +1,12 @@
+﻿from_code,from_name,to_code,to_name,observed,expected,transition_probability,adjusted_residual,raw_p_value,expected_lt_5,expected_lt_1,testable,warning_reason,p_holm,q_bh,sig_raw,sig_holm,sig_bh,significance,direction
+F,讲授,F,讲授,27,7.733,0.4655,7.994,1.3049359742267528e-15,False,False,True,,1.0569981391236698e-13,1.0569981391236698e-13,True,True,True,***,positive
+J,应答（被动反应）,J,应答（被动反应）,70,40.664,0.5263,6.626,3.4421741727483034e-11,False,False,True,,2.7537393381986426e-09,1.3940805399630628e-09,True,True,True,***,positive
+E,提问封闭性问题,E,提问封闭性问题,2,0.147,0.25,4.921,8.606104537510869e-07,True,True,True,expected_lt_5; expected_lt_1,6.626700493883369e-05,1.3941889350767607e-05,True,True,True,***,positive
+I,示范与引导,I,示范与引导,13,4.251,0.3023,4.709,2.485355020431918e-06,True,False,True,expected_lt_5,0.00018888698155282576,3.3552292775830896e-05,True,True,True,***,positive
+J,应答（被动反应）,B,教师鼓励表扬,20,9.172,0.1504,4.447,8.715680720266004e-06,False,False,True,,0.0006536760540199503,0.00010085287690593518,True,True,True,***,positive
+G,指示,G,指示,31,16.609,0.3647,4.389,1.1405091821071278e-05,False,False,True,,0.0008439767947592745,0.00011547655468834669,True,True,True,***,positive
+B,教师鼓励表扬,F,讲授,11,4.0,0.3667,3.896,9.764907190186958e-05,True,False,True,expected_lt_5,0.007128382248836479,0.0008788416471168262,True,True,True,**,positive
+F,讲授,D,提问开放性问题,17,8.0,0.2931,3.681,0.00023205353805830106,False,False,True,,0.016707854740197675,0.0018796336582722385,True,True,True,*,positive
+D,提问开放性问题,D,提问开放性问题,17,8.276,0.2833,3.518,0.0004351037146133411,False,False,True,,0.030892363737547217,0.003203945534880057,True,True,True,*,positive
+F,讲授,J,应答（被动反应）,0,17.733,0.0,-5.429,5.67085690051844e-08,False,False,True,,4.423268382404383e-06,1.148348522354984e-06,True,True,True,***,negative
+J,应答（被动反应）,G,指示,4,25.989,0.0301,-5.771,7.876673681363e-09,False,False,True,,6.222572208276771e-07,2.12670189396801e-07,True,True,True,***,negative

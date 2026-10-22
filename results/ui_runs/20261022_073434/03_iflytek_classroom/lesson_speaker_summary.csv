@@ -1,0 +1,3 @@
+﻿speaker_id,role,segments,speech_s,speech_pct,first_hms,last_hms,median_segment_s
+S01,teacher,242,1361.57,65.0,00:00:07.560,00:36:21.320,4.66
+S02,student,208,731.63,35.0,00:00:16.840,00:36:18.550,2.26

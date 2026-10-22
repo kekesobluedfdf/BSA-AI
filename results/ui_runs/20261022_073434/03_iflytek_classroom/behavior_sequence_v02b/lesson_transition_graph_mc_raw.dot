@@ -1,0 +1,24 @@
+digraph behavior_sequence {
+  graph [rankdir="LR", bgcolor="white", pad="0.3", nodesep="0.35", ranksep="0.7", labelloc="t", label="Monte Carlo：原始经验 p；蓝色实线=正向；红色虚线=负向；橙色点线=E<5；边标签=p, P(j|i)", fontsize="10"];
+  node [shape="box", style="rounded,filled", fillcolor="#F4F6F7", color="#566573", fontname="Microsoft YaHei"];
+  edge [fontname="Microsoft YaHei", fontsize="10"];
+  "A" [label="A"];
+  "B" [label="B"];
+  "C" [label="C"];
+  "D" [label="D"];
+  "E" [label="E"];
+  "F" [label="F"];
+  "G" [label="G"];
+  "I" [label="I"];
+  "J" [label="J"];
+  "I" -> "I" [label="p=0.000***\nP=0.30\nE<5", color="#B9770E", fontcolor="#B9770E", style="dotted", penwidth="2.48"];
+  "F" -> "F" [label="p=0.000***\nP=0.47", color="#2471A3", fontcolor="#2471A3", style="solid", penwidth="2.48"];
+  "J" -> "B" [label="p=0.000***\nP=0.15", color="#2471A3", fontcolor="#2471A3", style="solid", penwidth="2.48"];
+  "J" -> "J" [label="p=0.000***\nP=0.53", color="#2471A3", fontcolor="#2471A3", style="solid", penwidth="2.48"];
+  "G" -> "G" [label="p=0.000***\nP=0.36", color="#2471A3", fontcolor="#2471A3", style="solid", penwidth="2.36"];
+  "F" -> "D" [label="p=0.002**\nP=0.29", color="#2471A3", fontcolor="#2471A3", style="solid", penwidth="2.12"];
+  "D" -> "D" [label="p=0.002**\nP=0.28", color="#2471A3", fontcolor="#2471A3", style="solid", penwidth="2.12"];
+  "B" -> "F" [label="p=0.003**\nP=0.37\nE<5", color="#B9770E", fontcolor="#B9770E", style="dotted", penwidth="2.03"];
+  "E" -> "E" [label="p=0.009**\nP=0.25\nE<5", color="#B9770E", fontcolor="#B9770E", style="dotted", penwidth="1.81"];
+  "G" -> "J" [label="p=0.033*\nP=0.41", color="#2471A3", fontcolor="#2471A3", style="solid", penwidth="1.59"];
+}

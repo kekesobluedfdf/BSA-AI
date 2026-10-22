@@ -1,0 +1,30 @@
+digraph behavior_sequence {
+  graph [rankdir="LR", bgcolor="white", pad="0.3", nodesep="0.35", ranksep="0.7", labelloc="t", label="经典 LSA：原始 p；蓝色实线=正向；红色虚线=负向；橙色点线=E<5；边标签=Z, P(j|i)", fontsize="10"];
+  node [shape="box", style="rounded,filled", fillcolor="#F4F6F7", color="#566573", fontname="Microsoft YaHei"];
+  edge [fontname="Microsoft YaHei", fontsize="10"];
+  "A" [label="A\n教师接受情感"];
+  "B" [label="B\n教师鼓励表扬"];
+  "C" [label="C\n采纳意见"];
+  "D" [label="D\n提问开放性问题"];
+  "E" [label="E\n提问封闭性问题"];
+  "F" [label="F\n讲授"];
+  "G" [label="G\n指示"];
+  "I" [label="I\n示范与引导"];
+  "J" [label="J\n应答（被动反应）"];
+  "N" [label="N\n停顿或沉默"];
+  "F" -> "F" [label="Z=8.01***\nP=0.47", color="#2471A3", fontcolor="#2471A3", style="solid", penwidth="4.00"];
+  "J" -> "J" [label="Z=6.65***\nP=0.53", color="#2471A3", fontcolor="#2471A3", style="solid", penwidth="3.66"];
+  "E" -> "E" [label="Z=4.93***\nP=0.25\nE<5", color="#B9770E", fontcolor="#B9770E", style="dotted", penwidth="2.97"];
+  "I" -> "I" [label="Z=4.72***\nP=0.30\nE<5", color="#B9770E", fontcolor="#B9770E", style="dotted", penwidth="2.89"];
+  "J" -> "B" [label="Z=4.46***\nP=0.15", color="#2471A3", fontcolor="#2471A3", style="solid", penwidth="2.78"];
+  "G" -> "G" [label="Z=4.32***\nP=0.36", color="#2471A3", fontcolor="#2471A3", style="solid", penwidth="2.73"];
+  "B" -> "F" [label="Z=3.90***\nP=0.37\nE<5", color="#B9770E", fontcolor="#B9770E", style="dotted", penwidth="2.56"];
+  "F" -> "D" [label="Z=3.69***\nP=0.29", color="#2471A3", fontcolor="#2471A3", style="solid", penwidth="2.48"];
+  "D" -> "D" [label="Z=3.53***\nP=0.28", color="#2471A3", fontcolor="#2471A3", style="solid", penwidth="2.41"];
+  "I" -> "A" [label="Z=3.03**\nP=0.02\nE<5", color="#B9770E", fontcolor="#B9770E", style="dotted", penwidth="2.21"];
+  "A" -> "I" [label="Z=3.03**\nP=1.00\nE<5", color="#B9770E", fontcolor="#B9770E", style="dotted", penwidth="2.21"];
+  "G" -> "J" [label="Z=2.38*\nP=0.41", color="#2471A3", fontcolor="#2471A3", style="solid", penwidth="1.95"];
+  "B" -> "E" [label="Z=2.04*\nP=0.07\nE<5", color="#B9770E", fontcolor="#B9770E", style="dotted", penwidth="1.82"];
+  "E" -> "B" [label="Z=2.04*\nP=0.25\nE<5", color="#B9770E", fontcolor="#B9770E", style="dotted", penwidth="1.82"];
+  "N" -> "G" [label="Z=2.02*\nP=1.00\nE<5", color="#B9770E", fontcolor="#B9770E", style="dotted", penwidth="1.81"];
+}

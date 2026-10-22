@@ -1,0 +1,26 @@
+# Classroom transcription defaults.
+# Paths may be absolute or relative to the project root.
+
+model_root: models
+output_dir: results
+
+device: auto
+language: zh
+ncpu: 8
+
+# punc_segment: sentence-level segments (requires ct-punc)
+# vad_segment:  VAD boundaries only (three-model setup)
+spk_mode: punc_segment
+preset_spk_num: null
+teacher_id: S01
+
+# 3-second units for behavior coding. fixed: exact 3-second grid with text
+# split across windows; merge: variable-length blocks of at least 3 seconds.
+window_seconds: 3
+window_mode: fixed
+stats_window_min: 5
+
+batch_size_s: 60
+max_segment_ms: 30000
+merge_vad: false
+merge_length_s: 15

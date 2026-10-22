@@ -1,0 +1,16 @@
+﻿from_code,to_code,raw,holm,bh,mc_raw,mc_holm,mc_bh
+A,I,True,False,True,False,False,False
+B,E,True,False,False,False,False,False
+B,F,True,True,True,True,False,True
+D,D,True,True,True,True,False,True
+E,B,True,False,False,False,False,False
+E,E,True,True,True,True,False,False
+F,D,True,True,True,True,False,True
+F,F,True,True,True,True,True,True
+G,G,True,True,True,True,True,True
+G,J,True,False,False,True,False,False
+I,A,True,False,True,False,False,False
+I,I,True,True,True,True,True,True
+J,B,True,True,True,True,True,True
+J,J,True,True,True,True,True,True
+N,G,True,False,False,False,False,False

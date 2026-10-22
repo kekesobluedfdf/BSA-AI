@@ -1,0 +1,27 @@
+{
+  "created_at": "2026-10-22T09:22:03+08:00",
+  "ai_codes": "results\\ui_runs\\20261022_073434\\03_iflytek_classroom\\lesson_ai_codes.csv",
+  "human_codes": null,
+  "source": "ai",
+  "lag": 1,
+  "alpha": 0.05,
+  "exclude_codes": [],
+  "edge_mode": "positive",
+  "max_edges": 30,
+  "total_windows": 437,
+  "total_transitions": 436,
+  "significant_transitions": 27,
+  "z_critical": 1.9599639845400536,
+  "formula": "adjusted residual = (O - E) / sqrt(E * (1 - R/N) * (1 - C/N))",
+  "files": {
+    "frequency": "results\\ui_runs\\20261022_073434\\03_iflytek_classroom\\behavior_sequence\\lesson_behavior_frequency.csv",
+    "transition_frequency": "results\\ui_runs\\20261022_073434\\03_iflytek_classroom\\behavior_sequence\\lesson_transition_frequency.csv",
+    "transition_probability": "results\\ui_runs\\20261022_073434\\03_iflytek_classroom\\behavior_sequence\\lesson_transition_probability.csv",
+    "expected": "results\\ui_runs\\20261022_073434\\03_iflytek_classroom\\behavior_sequence\\lesson_expected_frequency.csv",
+    "residuals": "results\\ui_runs\\20261022_073434\\03_iflytek_classroom\\behavior_sequence\\lesson_residuals.csv",
+    "adjusted_residuals": "results\\ui_runs\\20261022_073434\\03_iflytek_classroom\\behavior_sequence\\lesson_adjusted_residuals.csv",
+    "adjusted_residuals_starred": "results\\ui_runs\\20261022_073434\\03_iflytek_classroom\\behavior_sequence\\lesson_adjusted_residuals_starred.csv",
+    "significant": "results\\ui_runs\\20261022_073434\\03_iflytek_classroom\\behavior_sequence\\lesson_significant_transitions.csv",
+    "graph_dot": "results\\ui_runs\\20261022_073434\\03_iflytek_classroom\\behavior_sequence\\lesson_transition_graph.dot"
+  }
+}

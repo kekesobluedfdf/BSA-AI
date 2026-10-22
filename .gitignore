@@ -1,0 +1,30 @@
+# Secrets
+my-project/.env
+.env
+
+# Local runtime and model weights
+my-project/.venv/
+models/
+**/__pycache__/
+**/*.pyc
+**/.pytest_cache/
+**/.streamlit/
+
+# Large data / external references
+sample-data/
+reference-projects/
+paper/
+*.zip
+results/studies/
+
+# Large raw audio (keep the text/CSV/HTML result artifacts)
+results/ui_runs/*/lesson.wav
+results/ui_runs/*/lesson.mp3
+results/ui_runs/*/lesson.m4a
+results/ui_runs/*/lesson.flac
+
+# Historical experimental outputs
+results/ui_runs/*/03_iflytek_rolenum2_bad/
+results/ui_runs/*/behavior_sequence_v02a/
+results/ui_runs/*/behavior_sequence_v02b/
+results/ui_runs/*/behavior_sequence_v02c_negative_included/

@@ -1,0 +1,13 @@
+{
+  "analysis_unit": "behavior_state_segment",
+  "source_analysis_unit": "fixed_time_window_primary_code",
+  "lag": 1,
+  "sequence_count": 1,
+  "sequence_lengths": [
+    274
+  ],
+  "state_count": 274,
+  "transition_count": 273,
+  "inference": "descriptive_only",
+  "warning": "不要将合并状态后的转移概率解释为每 5 秒窗口的转移概率"
+}

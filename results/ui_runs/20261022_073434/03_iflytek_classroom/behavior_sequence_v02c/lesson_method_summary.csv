@@ -1,0 +1,7 @@
+﻿method,significant_count,expected_lt5_significant
+raw,15,8
+holm,9,3
+bh,11,5
+mc_raw,10,3
+mc_holm,5,1
+mc_bh,8,2

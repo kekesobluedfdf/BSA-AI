@@ -1,0 +1,30 @@
+digraph behavior_sequence {
+  graph [rankdir="LR", bgcolor="white", pad="0.3", nodesep="0.35", ranksep="0.7"];
+  node [shape="box", style="rounded,filled", fillcolor="#F4F6F7", color="#566573", fontname="Microsoft YaHei"];
+  edge [fontname="Microsoft YaHei", fontsize="10"];
+  "A" [label="A\n教师接受情感"];
+  "B" [label="B\n教师鼓励表扬"];
+  "C" [label="C\n采纳意见"];
+  "D" [label="D\n提问开放性问题"];
+  "E" [label="E\n提问封闭性问题"];
+  "F" [label="F\n讲授"];
+  "G" [label="G\n指示"];
+  "I" [label="I\n示范与引导"];
+  "J" [label="J\n应答（被动反应）"];
+  "N" [label="N\n停顿或沉默"];
+  "F" -> "F" [label="8.01***", color="#2471A3", fontcolor="#2471A3", style="solid", penwidth="4.00"];
+  "J" -> "J" [label="6.65***", color="#2471A3", fontcolor="#2471A3", style="solid", penwidth="3.66"];
+  "E" -> "E" [label="4.93***", color="#2471A3", fontcolor="#2471A3", style="solid", penwidth="2.97"];
+  "I" -> "I" [label="4.72***", color="#2471A3", fontcolor="#2471A3", style="solid", penwidth="2.89"];
+  "J" -> "B" [label="4.46***", color="#2471A3", fontcolor="#2471A3", style="solid", penwidth="2.78"];
+  "G" -> "G" [label="4.32***", color="#2471A3", fontcolor="#2471A3", style="solid", penwidth="2.73"];
+  "B" -> "F" [label="3.90***", color="#2471A3", fontcolor="#2471A3", style="solid", penwidth="2.56"];
+  "F" -> "D" [label="3.69***", color="#2471A3", fontcolor="#2471A3", style="solid", penwidth="2.48"];
+  "D" -> "D" [label="3.53***", color="#2471A3", fontcolor="#2471A3", style="solid", penwidth="2.41"];
+  "I" -> "A" [label="3.03**", color="#2471A3", fontcolor="#2471A3", style="solid", penwidth="2.21"];
+  "A" -> "I" [label="3.03**", color="#2471A3", fontcolor="#2471A3", style="solid", penwidth="2.21"];
+  "G" -> "J" [label="2.38*", color="#2471A3", fontcolor="#2471A3", style="solid", penwidth="1.95"];
+  "B" -> "E" [label="2.04*", color="#2471A3", fontcolor="#2471A3", style="solid", penwidth="1.82"];
+  "E" -> "B" [label="2.04*", color="#2471A3", fontcolor="#2471A3", style="solid", penwidth="1.82"];
+  "N" -> "G" [label="2.02*", color="#2471A3", fontcolor="#2471A3", style="solid", penwidth="1.81"];
+}

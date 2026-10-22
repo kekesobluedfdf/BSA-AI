@@ -1,0 +1,21 @@
+{
+  "preset_spk_num": null,
+  "teacher_id": "S01",
+  "window_seconds": 5.0,
+  "stats_window_min": 5.0,
+  "device": "cuda:0",
+  "use_refine": false,
+  "use_hybrid": false,
+  "use_corrections": false,
+  "use_intra_review": false,
+  "auto_chorus": false,
+  "use_punc": false,
+  "use_hotwords": false,
+  "auto_punctuate": false,
+  "audio_sha256": "9c9f4705e65d632777e7d8563a507df0b186608eef58c397ed419ef07b26871d",
+  "audio_filename": "lesson.wav",
+  "asr_engine": "iflytek",
+  "iflytek_pd": "edu",
+  "iflytek_role_num": 10,
+  "iflytek_teacher_speaker": "auto"
+}

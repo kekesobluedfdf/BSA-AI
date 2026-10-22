@@ -1,0 +1,22 @@
+--index-url https://pypi.tuna.tsinghua.edu.cn/simple
+--extra-index-url https://download.pytorch.org/whl/cu130
+
+torch==2.11.0+cu130
+torchaudio==2.11.0+cu130
+funasr==1.4.16
+modelscope==1.40.2
+pandas==3.0.6
+streamlit==1.66.0
+numpy==2.5.4
+scipy==1.18.1
+soundfile==0.14.0
+librosa==1.0.0
+PyYAML==6.0.3
+
+requests==2.34.2
+
+graphviz==0.21
+
+statsmodels==0.15.0
+
+matplotlib==3.11.2
