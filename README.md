@@ -1,8 +1,50 @@
-ClassroomResearchAI 学生分发包使用指南这是一个轻量级分发包，包含程序代码、教程、编码示例以及 20261022_073434 的转录、编码与 LSA 结果。1. 快速上手（无需安装 Python）如果您只需要阅读和复现已有结果，请直接按以下步骤操作：解压压缩包。双击打开 docs/user_guide.html。查看 results/ui_runs/20261022_073434/ 目录下的 CSV、逐字稿与 HTML 报告。📌 推荐优先查看的文件results/ui_runs/20261022_073434/03_iflytek_classroom/lesson_verbatim.txtresults/ui_runs/20261022_073434/03_iflytek_classroom/lesson_ai_codes.csvresults/ui_runs/20261022_073434/03_iflytek_classroom/behavior_sequence_v02c/lesson_report_holm.html💡 提示：分发包未包含原始 lesson.wav 音频，因此播放音频或重新进行本地转录需要另外获取音频文件。2. 运行交互界面（UI）第一步：准备 Python 环境建议安装 Python 3.12。打开 PowerShell，进入项目中的 my-project 目录并配置虚拟环境：PowerShellcd D:\ClassroomResearchAI_student\my-project
+# ClassroomResearchAI 学生分发包
+
+这是一个轻量分发包，包含程序代码、教程、编码示例和 `20261022_073434` 的转录/编码/LSA 结果。
+
+## 先说最简单的用法
+
+如果你只想**阅读和复现已有结果**，不需要安装 Python：
+
+1. 解压压缩包；
+2. 双击打开 `docs/user_guide.html`；
+3. 查看 `results/ui_runs/20261022_073434/` 下的 CSV、逐字稿和 HTML 报告。
+
+推荐先看：
+
+```text
+results/ui_runs/20261022_073434/03_iflytek_classroom/lesson_verbatim.txt
+results/ui_runs/20261022_073434/03_iflytek_classroom/lesson_ai_codes.csv
+results/ui_runs/20261022_073434/03_iflytek_classroom/behavior_sequence_v02c/lesson_report_holm.html
+```
+
+分发包**没有包含原始 `lesson.wav`**，所以播放音频、重新做本地转录等功能需要另外获取音频。
+
+## 如果想运行界面
+
+### 1. 准备 Python
+
+建议安装 Python 3.12。安装后打开 PowerShell，进入本目录下的：
+
+```text
+my-project
+```
+
+例如：
+
+```powershell
+cd D:\ClassroomResearchAI_student\my-project
 python -m venv .venv
 .venv\Scripts\activate
 pip install -r requirements.txt
-第二步：准备本地模型（可选）如果使用本地 FunASR 模式，需将模型放置在分发包根目录的 models/ 文件夹下（注意：不是放在 my-project/models/）：Plaintextstudent_release/
+```
+
+### 2. 准备模型
+
+本地 FunASR 模式需要把模型放在**分发包根目录**的 `models/`，不是在 `my-project/models/`：
+
+```text
+student_release/
 ├── my-project/
 ├── models/
 │   ├── SenseVoiceSmall/
@@ -11,12 +53,101 @@ pip install -r requirements.txt
 │   ├── ct-punc/
 │   └── Fun-ASR-Nano/
 └── results/
-模型文件较大，通常由老师提供下载链接或拷贝。若仅使用“讯飞云端高精度”转写，可暂时不配本地 ASR 模型；但 AI 编码、人工复核和 LSA 依然可用。第三步：配置 API Key复制模板文件：Plaintextmy-project/.env.example -> my-project/.env
-在 .env 中填写对应的 Key：代码段IFLYTEK_APP_ID=your_app_id
-IFLYTEK_API_KEY=your_api_key
-IFLYTEK_API_SECRET=your_api_secret
-deepseek_api_key=your_deepseek_key
-讯飞三项：仅在使用讯飞云端转写时需要。DeepSeek Key：仅在使用 AI 编码时需要。⚠️ 安全提醒：切勿将包含私密信息的 .env 文件发送给他人。第四步：启动程序方法 A：双击运行 my-project/start_ui.bat方法 B：在命令行中运行：PowerShellcd my-project
+```
+
+模型文件较大，通常由老师提供下载链接或拷贝，不在分发包内。
+
+如果只使用“讯飞云端高精度”转写，可以暂时不需要本地 ASR 模型；但 AI 编码、人工复核和 LSA 仍然可用。
+
+### 3. 配置 API Key
+
+复制：
+
+```text
+my-project/.env.example
+```
+
+为：
+
+```text
+my-project/.env
+```
+
+填写：
+
+```env
+IFLYTEK_APP_ID=
+IFLYTEK_API_KEY=
+IFLYTEK_API_SECRET=
+deepseek_api_key=
+```
+
+- 只有使用讯飞云端转写时才需要讯飞三项；
+- 只有使用 AI 编码时才需要 DeepSeek Key；
+- 不要把自己的 `.env` 发给别人。
+
+### 4. 启动
+
+双击：
+
+```text
+my-project/start_ui.bat
+```
+
+或：
+
+```powershell
+cd my-project
 .venv\Scripts\activate
 python -m streamlit run ui/app.py
-启动成功后，在浏览器中访问：http://localhost:85013. 使用现有 073434 历史结果启动 UI 界面后：在左侧菜单栏选择 “单课堂分析”。历史任务下拉框中选择 20261022_073434。点击 “加载选中的历史任务”。即可直接查看逐字稿、片段划分、行为序列及分析报告。4. 常见问题解答 (FAQ)问题现象检查与解决方法启动时报错 streamlit 找不到确认是否已激活虚拟环境 (.venv\Scripts\activate) 并重新执行 pip install -r requirements.txt。本地模式提示模型不存在检查 models/ 文件夹是否位于分发包根目录，而不是 my-project/models/ 内。AI 编码提示没有 Key检查 my-project/.env 文件中是否正确配置了 deepseek_api_key，修改后请重启 UI。没有 NVIDIA 独立显卡可以在界面中将硬件选择为 cpu，但本地模型的运行速度会明显变慢。建议机房电脑由老师统一配置或改用云端模式。分发包里为什么没有音频？为了控制 GitHub 仓库体积和发送文件的大小。如需原始音频进行完整复现，请向老师单独索取音频文件。
+```
+
+浏览器打开：
+
+```text
+http://localhost:8501
+```
+
+## 使用现有 073434 结果
+
+启动后：
+
+1. 左侧选择“单课堂分析”；
+2. 历史任务选择 `20261022_073434`；
+3. 点击“加载选中的历史任务”；
+4. 查看逐字稿、片段、行为序列和报告。
+
+如果没有音频文件，部分依赖音频的功能会不可用，但 CSV 和 HTML 结果仍可查看。
+
+## 常见问题
+
+### 启动时报 `streamlit` 找不到
+
+确认已经激活虚拟环境：
+
+```powershell
+.venv\Scripts\activate
+```
+
+并重新执行：
+
+```powershell
+pip install -r requirements.txt
+```
+
+### 本地模式提示模型不存在
+
+检查 `models/` 是否在分发包根目录，而不是 `my-project/models/`。
+
+### AI 编码提示没有 Key
+
+检查 `my-project/.env` 中是否有 `deepseek_api_key`，修改后重启 UI。
+
+### 没有 NVIDIA 显卡
+
+可以在界面里选择 `cpu`，但本地模型会明显变慢。教室电脑建议由老师提供已配置好的环境或使用云端模式。
+
+### 分发包里没有音频
+
+这是为了控制 GitHub/发送体积。需要原始音频时，向老师获取单独的音频文件。
+#
