@@ -1,4 +1,4 @@
-# ClassroomResearchAI 学生分发包
+# Behavior sequence analysis (轻量版/学生分发包）
 
 这是一个轻量分发包，包含程序代码、教程、编码示例和 `20261022_073434` 的转录/编码/LSA 结果。
 
@@ -55,7 +55,8 @@ student_release/
 └── results/
 ```
 
-模型文件较大，通常由老师提供下载链接或拷贝，不在分发包内。
+模型文件较大，完整版连接地址（https://pan.baidu.com/s/1oDFwtolloFK9MEBeb0gPrg?pwd=cihe 提取码: cihe 
+），不在分发包内。
 
 如果只使用“讯飞云端高精度”转写，可以暂时不需要本地 ASR 模型；但 AI 编码、人工复核和 LSA 仍然可用。
 
